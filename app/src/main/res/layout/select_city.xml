@@ -34,4 +34,27 @@
             android:gravity="center"
             />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            android:id="@+id/title_list"
+            android:background="#ffffff"
+        </ListView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        android:layout_below="@id/selectcity_title"
+        <ListView
+            android:id="@+id/selectcity_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+    </RelativeLayout>
 </RelativeLayout>

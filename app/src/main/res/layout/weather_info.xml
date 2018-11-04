@@ -111,7 +111,7 @@
                 android:layout_below="@id/time"
                 android:layout_marginLeft="15.0dip"
                 android:singleLine="true"
-                android:text="温度：0°C"
+                android:text="温度：0℃"
                 android:textColor="@android:color/white"
                 android:textSize="20.0sp" />
 
@@ -183,6 +183,24 @@
                         android:layout_marginLeft="5.0dip"
                         android:src="@drawable/biz_plugin_weather_0_50" />
 
+                    <!--最高温度-->
+                    <TextView
+                        android:id="@+id/high"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="最高温度：100℃"
+                        android:textColor="@android:color/white"
+                        android:textSize="25.0sp" />
+                    <!--最低温度-->
+                    <TextView
+                        android:id="@+id/low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="最低温度：-100℃"
+                        android:textColor="@android:color/white"
+                        android:textSize="25.0sp" />
                 </LinearLayout>
 
                 <!--污染等级重度污染-->
@@ -192,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="重度污染"
+                    android:text="无污染"
                     android:textColor="@android:color/white"
                     android:textSize="20.0sp" />
 

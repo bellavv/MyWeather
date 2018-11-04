@@ -29,9 +29,11 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
     private ImageView mUpdateBtn;
     private ImageView mCitySelect;
+    private String updateCityCode;
 
     private static final int UPDATE_TODAY_WEATHER = 1;
     private TextView cityTv, timeTv, humidityTv, weekTv, pmDataTv,pmQualityTv,temperatureTv, climateTv, windTv, city_name_Tv;
+    private TextView highTv,lowTv;
     private ImageView weatherImg, pmImg;
     private Handler mHandler=new Handler(){
         public void handleMessage(android.os.Message msg) {
@@ -66,6 +68,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             mCitySelect = (ImageView) findViewById(R.id.title_city_manager);
             mCitySelect.setOnClickListener(this);
         initView();
+
+        updateCityCode = getIntent().getStringExtra("citycode");
+        if(updateCityCode!="-1")
+        {
+            parseXML(updateCityCode);
+        }
+
     }
 
     void initView(){
@@ -81,6 +90,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         climateTv = (TextView) findViewById(R.id.climate);
         windTv = (TextView) findViewById(R.id.wind);
         weatherImg = (ImageView) findViewById(R.id.weather_img);
+        highTv = (TextView) findViewById(R.id.high);
+        lowTv = (TextView) findViewById(R.id.low);
+
         city_name_Tv.setText("N/A");
         cityTv.setText("N/A");
         timeTv.setText("N/A");
@@ -92,6 +104,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         climateTv.setText("N/A");
         windTv.setText("N/A");
         //updateTodayWeather(TodayWeather todayWeather);
+
     }
 
     @Override
@@ -293,8 +306,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         weekTv.setText("今天  "+todayWeather.getDate());
         pmDataTv.setText(todayWeather.getPm25());
         pmQualityTv.setText(todayWeather.getQuality());
-        //highTv.setText(todayWeather.getHigh());
-        //lowTv.setText(todayWeather.getLow());
+        highTv.setText(todayWeather.getHigh());
+        lowTv.setText(todayWeather.getLow());
         //当前温度，
         climateTv.setText(todayWeather.getType());
         windTv.setText(todayWeather.getFengxiang()+todayWeather.getFengli());
