@@ -35,7 +35,7 @@ public class TodayWeather {
     }
 
     public String getWendu() {
-        return wendu;
+        return low+"~"+high;
     }
 
     public String getShidu() {

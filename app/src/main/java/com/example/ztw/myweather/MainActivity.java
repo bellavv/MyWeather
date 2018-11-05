@@ -27,7 +27,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
  * Created by ztw on 2018/9/28.
  */
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
-    private ImageView mUpdateBtn;
+    private ImageView mUpdateBtn;//各种控件
     private ImageView mCitySelect;
     private String updateCityCode;
 
@@ -69,13 +69,25 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             mCitySelect.setOnClickListener(this);
         initView();
 
-        updateCityCode = getIntent().getStringExtra("citycode");
-        if(updateCityCode!="-1")
-        {
-            parseXML(updateCityCode);
-        }
+
 
     }
+
+//    @Override
+//    public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
+//        super.startActivityForResult(intent, requestCode, options);
+//        updateCityCode = getIntent().getStringExtra("citycode");//null
+//        if(updateCityCode!="-1" && updateCityCode != null)
+//        {
+//            TodayWeather wea = parseXML(updateCityCode);
+//            Message m = new Message();
+//            m.what = UPDATE_TODAY_WEATHER;
+//            m.obj = wea;
+//            mHandler.sendMessage(m);
+//        }
+//        else
+//            Toast.makeText(MainActivity.this,"系统出错", Toast.LENGTH_LONG).show();
+//    }
 
     void initView(){
         city_name_Tv = (TextView) findViewById(R.id.title_city_name);
@@ -147,7 +159,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 Log.d("myWeather", "网络挂了");
                 Toast.makeText(MainActivity.this, "网络挂了！", Toast.LENGTH_LONG).show();
             }
-    }    }
+        }
+        updateCityCode = getIntent().getStringExtra("citycode");//null
+        if(updateCityCode!="-1" && updateCityCode != null)
+        {
+            TodayWeather wea = parseXML(updateCityCode);
+            Message m = new Message();
+            m.what = UPDATE_TODAY_WEATHER;
+            m.obj = wea;
+            mHandler.sendMessage(m);
+        }
+        else
+            Toast.makeText(MainActivity.this,"系统出错", Toast.LENGTH_LONG).show();
+    }
 
     /**
      *
@@ -301,7 +325,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         city_name_Tv.setText(todayWeather.getCity()+"天气");
         cityTv.setText(todayWeather.getCity());
         timeTv.setText(todayWeather.getUpdatetime()+"发布");
-        temperatureTv.setText("温度："+todayWeather.getWendu()+"℃");
+        temperatureTv.setText("温度："+todayWeather.getWendu());
         humidityTv.setText("湿度："+todayWeather.getShidu());
         weekTv.setText("今天  "+todayWeather.getDate());
         pmDataTv.setText(todayWeather.getPm25());

@@ -159,9 +159,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:text="PM2.5"
+                            android:text="PM2.5数值:"
                             android:textColor="@android:color/white"
-                            android:textSize="15.0sp" />
+                            android:textSize="25.0sp" />
 
                         <!--PM2.5数值-->
                         <TextView
@@ -170,6 +170,23 @@
                             android:layout_height="wrap_content"
                             android:singleLine="true"
                             android:text="200"
+                            android:textColor="@android:color/white"
+                            android:textSize="15.0sp" />
+                        <!--最高温度-->
+                        <TextView
+                            android:id="@+id/high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textColor="@android:color/white"
+                            android:textSize="25.0sp" />
+                        <!--最低温度-->
+                        <TextView
+                            android:id="@+id/low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+
                             android:textColor="@android:color/white"
                             android:textSize="25.0sp" />
 
@@ -183,24 +200,7 @@
                         android:layout_marginLeft="5.0dip"
                         android:src="@drawable/biz_plugin_weather_0_50" />
 
-                    <!--最高温度-->
-                    <TextView
-                        android:id="@+id/high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:text="最高温度：100℃"
-                        android:textColor="@android:color/white"
-                        android:textSize="25.0sp" />
-                    <!--最低温度-->
-                    <TextView
-                        android:id="@+id/low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:text="最低温度：-100℃"
-                        android:textColor="@android:color/white"
-                        android:textSize="25.0sp" />
+
                 </LinearLayout>
 
                 <!--污染等级重度污染-->
@@ -260,7 +260,7 @@
                     android:singleLine="true"
                     android:text="-2℃~7℃"
                     android:textColor="@android:color/white"
-                    android:textSize="30.0sp" />
+                    android:textSize="20sp" />
 
                 <!--天气状况-->
                 <TextView
