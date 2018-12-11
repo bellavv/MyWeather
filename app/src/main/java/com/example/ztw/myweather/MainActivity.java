@@ -1,5 +1,6 @@
 package com.example.ztw.myweather;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -34,6 +35,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private static final int UPDATE_TODAY_WEATHER = 1;
     private TextView cityTv, timeTv, humidityTv, weekTv, pmDataTv,pmQualityTv,temperatureTv, climateTv, windTv, city_name_Tv;
     private TextView highTv,lowTv;
+    private TextView rangeTv;
     private ImageView weatherImg, pmImg;
     private Handler mHandler=new Handler(){
         public void handleMessage(android.os.Message msg) {
@@ -98,12 +100,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         pmDataTv = (TextView)findViewById(R.id.pm_data);
         pmQualityTv = (TextView) findViewById(R.id.pm2_5_quality);
         pmImg = (ImageView)findViewById(R.id.pm2_5_img);
-        temperatureTv = (TextView) findViewById(R.id.temperature);
         climateTv = (TextView) findViewById(R.id.climate);
         windTv = (TextView) findViewById(R.id.wind);
         weatherImg = (ImageView) findViewById(R.id.weather_img);
         highTv = (TextView) findViewById(R.id.high);
         lowTv = (TextView) findViewById(R.id.low);
+        rangeTv = (TextView) findViewById(R.id.rangeTemperature);
 
         city_name_Tv.setText("N/A");
         cityTv.setText("N/A");
@@ -112,7 +114,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         pmDataTv.setText("N/A");
         pmQualityTv.setText("N/A");
         weekTv.setText("N/A");
-        temperatureTv.setText("N/A");
+        rangeTv.setText("N/A");
         climateTv.setText("N/A");
         windTv.setText("N/A");
         //updateTodayWeather(TodayWeather todayWeather);
@@ -121,6 +123,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+//        if(view.getId() == R.id.title_update_btn)
+//        {
+//            SharedPreferences mySharePre = getSharedPreferences("CityCodePreference", Activity.MODE_PRIVATE);
+//            String sharecode =
+//        }
         if(view.getId() == R.id.title_city_manager)
         {
             Intent i = new Intent(this,SelectCity.class);
@@ -143,13 +150,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
         }
     }
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)//从选择城市界面返回执行这个函数
     {
-        if (requestCode == 1 && resultCode == RESULT_OK)
+        if (requestCode == 1 && resultCode == RESULT_OK)//设置了结果
         {
-            String newCityCode= data.getStringExtra("cityCode");
+            String newCityCode= data.getStringExtra("cityCode");//返回城市的代码
             Log.d("myWeather", "选择的城市代码为"+newCityCode);
-            if (NetUtil.getNetworkState(this) != NetUtil.NETWORN_NONE)
+            if (NetUtil.getNetworkState(this) != NetUtil.NETWORN_NONE)//判断当前网络
             {
                 Log.d("myWeather", "网络OK");
                 queryWeatherCode(newCityCode);
@@ -160,14 +167,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this, "网络挂了！", Toast.LENGTH_LONG).show();
             }
         }
-        updateCityCode = getIntent().getStringExtra("citycode");//null
+        updateCityCode = getIntent().getStringExtra("citycode");//城市代码
         if(updateCityCode!="-1" && updateCityCode != null)
         {
-            TodayWeather wea = parseXML(updateCityCode);
-            Message m = new Message();
-            m.what = UPDATE_TODAY_WEATHER;
-            m.obj = wea;
-            mHandler.sendMessage(m);
+            TodayWeather wea = parseXML(updateCityCode);//解析天气，产生天气这个类
+            Message m = new Message();//设置一个消息，用于在多线程情况下通知主线程更改数据
+            m.what = UPDATE_TODAY_WEATHER;//设置来自于哪个事件
+            m.obj = wea;//这是类
+            mHandler.sendMessage(m);//发送
         }
         else
             Toast.makeText(MainActivity.this,"系统出错", Toast.LENGTH_LONG).show();
@@ -177,7 +184,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
      *
      * @param cityCode
      */
-    private void queryWeatherCode(String cityCode)  {
+    private void queryWeatherCode(String cityCode)  {//
         final String address = "http://wthrcdn.etouch.cn/WeatherApi?citykey=" + cityCode;
         Log.d("my Weather", address);
         new Thread(new Runnable() {
@@ -325,13 +332,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         city_name_Tv.setText(todayWeather.getCity()+"天气");
         cityTv.setText(todayWeather.getCity());
         timeTv.setText(todayWeather.getUpdatetime()+"发布");
-        temperatureTv.setText("温度："+todayWeather.getWendu());
+//        temperatureTv.setText("温度："+todayWeather.getWendu());
         humidityTv.setText("湿度："+todayWeather.getShidu());
         weekTv.setText("今天  "+todayWeather.getDate());
         pmDataTv.setText(todayWeather.getPm25());
         pmQualityTv.setText(todayWeather.getQuality());
         highTv.setText(todayWeather.getHigh());
         lowTv.setText(todayWeather.getLow());
+        rangeTv.setText("温度范围："+todayWeather.getLow()+"~"+todayWeather.getHigh());
         //当前温度，
         climateTv.setText(todayWeather.getType());
         windTv.setText(todayWeather.getFengxiang()+todayWeather.getFengli());

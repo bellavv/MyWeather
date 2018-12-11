@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+    <!--当前城市-->
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="45.0dip"
-        android:background="#ffcd2626" >
+        android:background="#ffcd2626"
+        android:id="@+id/relativeLayout">
         <TextView
             android:id="@+id/title_name"
             android:layout_width="fill_parent"
@@ -35,26 +37,53 @@
             />
     </RelativeLayout>
 
+    <!--搜索界面-->
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="45.0dp"
+        android:id="@+id/selectcity_search_rela">
+        <!--框-->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@+id/selectcity_search_buttonrela">
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/selectcity_search"
+                android:background="@drawable/search_city"
+                android:hint="  搜索全国城市"
+                android:paddingLeft="35.0dp"
+                android:singleLine="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+                </EditText>
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            android:id="@+id/title_list"
-            android:background="#ffffff"
-        </ListView>
+        </RelativeLayout>
+        <!--按钮-->
+        <RelativeLayout
+            android:layout_width="80.0dp"
+            android:layout_height="45.0dp"
+            android:id="@+id/selectcity_search_buttonrela"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/selectcity_search_button"
+                android:src="@drawable/magnifying_glass"/>
+        </RelativeLayout>
+。
     </RelativeLayout>
-    <RelativeLayout
+    <!--列表-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout">
 
-        android:layout_below="@id/selectcity_title"
         <ListView
             android:id="@+id/selectcity_lv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
         </ListView>
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
